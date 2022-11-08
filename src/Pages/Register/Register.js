@@ -44,10 +44,10 @@ const Register = () => {
                                         <div className="text-center">
                                             <img
                                                 className="mx-auto w-48"
-                                                src="https://m dbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                                                 alt="logo"
                                             />
-                                            <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">Creating Poetry through Pictures is always the first priority here</h4>
+                                            <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">Creating Poetry through Picture is always the first priority here</h4>
                                         </div>
                                         <form onSubmit={handleRegisterSubmission}>
                                             <p className="mb-4">Please Register</p>

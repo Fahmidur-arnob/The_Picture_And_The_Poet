@@ -60,7 +60,7 @@ const Login = () => {
                                                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                                                 alt="logo"
                                             />
-                                            <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">Creating Poetry through Pictures is always the first priority here</h4>
+                                            <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">Creating Poetry through Picture is always the first priority here</h4>
                                         </div>
                                         <form onSubmit={handleLoginSubmission}>
                                             <p className="mb-4">Please login to your account</p>
