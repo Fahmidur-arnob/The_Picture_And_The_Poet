@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import {FaUser} from 'react-icons/fa';
 
-const Header = () => {
+const Header = ({ props }) => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+
+            })
+            .catch(err => console.log(`Error is ${err}`));
+    }
     return (
         <div>
             <div className="navbar bg-rose-600 text-gray-50">
@@ -33,9 +43,28 @@ const Header = () => {
                         <li><Link to='/appointment'>Appointment</Link></li>
                     </ul>
                 </div>
-                <div className="navbar-end gap-2">
-                    <Link className="btn" to='/login'>Login</Link>
-                    <Link className="btn" to='/register'>Register</Link>
+                <div className="navbar-end gap-2 mx-4">
+                    {
+                        user?.uid ?
+                            <>
+                                <span className=''>{user?.displayName}</span>
+                                <button onClick={handleLogOut}>LogOut</button>
+                            </>
+                            :
+                            <>
+                                <Link className="btn" to='/login'>Login</Link>
+                                <Link className="btn" to='/register'>Register</Link>
+                            </>
+                    }
+                </div>
+                <div className='mr-2'>
+                    {
+                        user?.photoURL 
+                        ? 
+                        <img style={{height:'30px'}} rounded-xl src={user?.photoURL} title={`${user?.displayName}`} alt="No Img" />
+                        : 
+                        user?.uid ? <FaUser></FaUser> :<></>
+                    }
                 </div>
             </div>
         </div>
