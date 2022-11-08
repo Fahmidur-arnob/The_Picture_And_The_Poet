@@ -1,0 +1,15 @@
+
+.picGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:18px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainPicGrid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
