@@ -1,13 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
+import app from '../../firebase/firebase.config';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
+import { FaGooglePlusG } from 'react-icons/fa';
 
 const Login = () => {
+    const [errorMsg, setErrorMsg] = useState(null);
+    const { googleProviderLogin, signIn } = useContext(AuthContext);
+
+    const googleProvider = new GoogleAuthProvider();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    //const from = location.state?.from?.pathname || '/'
+
+    const handleGoogleLogin = () => {
+        googleProviderLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.log(`Error is ${error}`));
+    }
 
     const handleLoginSubmission = event => {
         event.preventDefault();
-        const email = event.target.email.value;
-        const password = event.target.password.value;
-        console.log(email, password);
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        if (password < 6) {
+            setErrorMsg(`${password} is too short.`);
+            return;
+        }
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                // navigate(from, { replace: true })
+            })
+            .catch(error => console.log(`Error is ${error}`));
     }
 
     return (
@@ -34,8 +69,8 @@ const Login = () => {
                                                     type="email"
                                                     name="email"
                                                     className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    
-                                                    placeholder="Username"
+
+                                                    placeholder="Enter Your Email"
                                                 />
                                             </div>
                                             <div className="mb-4">
@@ -43,14 +78,14 @@ const Login = () => {
                                                     type="password"
                                                     name="password"
                                                     className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    
-                                                    placeholder="Password"
+
+                                                    placeholder="Enter Your Password"
                                                 />
                                             </div>
                                             <div className="text-center pt-1 mb-12 pb-1">
                                                 <button
                                                     className="inline-block px-6 py-2.5 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-rose-400 hover:text-white hover:shadow-lg focus:shadow-lg  focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                                                    type="button"
+                                                    type="submit"
                                                     data-mdb-ripple="true"
                                                     data-mdb-ripple-color="light"
                                                 >
@@ -60,7 +95,7 @@ const Login = () => {
                                             </div>
                                             <div className="flex items-center justify-between pb-6">
                                                 <p className="mb-0 mr-2">Don't have an account?</p>
-                                                <Link to='/register'> 
+                                                <Link to='/register'>
                                                     <button
                                                         type="button"
                                                         className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
@@ -69,6 +104,17 @@ const Login = () => {
                                                         Register
                                                     </button>
                                                 </Link>
+                                                <Link>
+                                                    <button
+                                                        onClick={handleGoogleLogin}
+                                                        type="button"
+                                                        className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                                                        data-mdb-ripple="true"
+                                                        data-mdb-ripple-color="light">
+                                                        <FaGooglePlusG></FaGooglePlusG>
+                                                    </button>
+                                                </Link>
+                                                <p>{errorMsg}</p>
                                             </div>
                                         </form>
                                     </div>
@@ -77,13 +123,7 @@ const Login = () => {
                                     className="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
                                 >
                                     <div className="text-white px-4 py-6 md:p-12 md:mx-6">
-                                        <h4 className="text-xl font-semibold mb-6">We are more than just a company</h4>
-                                        <p className="text-sm">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat.
-                                        </p>
+                                        <h4 className="text-xl font-semibold mb-6">Creating Poetry through Pictures is always the first priority here</h4>
                                     </div>
                                 </div>
                             </div>
