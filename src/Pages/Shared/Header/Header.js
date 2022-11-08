@@ -34,8 +34,8 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <Link className="btn">Login</Link>
-                    <Link className="btn">Register</Link>
+                    <Link className="btn" to='/login'>Login</Link>
+                    <Link className="btn" to='/register'>Register</Link>
                 </div>
             </div>
         </div>
