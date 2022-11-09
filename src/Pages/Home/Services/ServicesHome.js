@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import ServiceCard from '../../Services/ServiceCard';
+import ServiceCardThree from './ServiceCardThree';
 
-const Services = () => {
+const ServicesHome = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
@@ -10,6 +10,7 @@ const Services = () => {
         .then(res => res.json())
         .then(data => setServices(data))
     }, []);
+
     return (
         <div>
             <div className='mb-20'>
@@ -20,10 +21,10 @@ const Services = () => {
             </div>
             <div className='grid gap-7 grid-cols-1 md:grid-cols-1 lg:grid-cols-3 sm-grid-cols-1'>
                 {
-                    services.map(service => <ServiceCard
-                        key={service._id}
-                        service={service}
-                    ></ServiceCard>)
+                    services.map(service => <ServiceCardThree
+                    key={service._id}
+                    service={service}
+                    ></ServiceCardThree>)
                 }
             </div>
         </div>
@@ -31,4 +32,4 @@ const Services = () => {
     );
 };
 
-export default Services;
+export default ServicesHome;

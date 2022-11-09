@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ServiceCard = ({ service }) => {
+const ServiceCardThree = ({ service }) => {
     const { _id, image, price, name, description } = service;
     return (
         <div>
@@ -22,4 +22,4 @@ const ServiceCard = ({ service }) => {
     );
 };
 
-export default ServiceCard;
+export default ServiceCardThree;
