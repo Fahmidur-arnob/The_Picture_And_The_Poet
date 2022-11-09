@@ -12,9 +12,9 @@ const BannerItem = ({ slide }) => {
             <div className="absolute flex justify-end transform -translate-y-1/2 left-5 top-1/4">
                 <h1 className='font-bold text-gray-50 lg:text-6xl'>
                     I freeze <br />
-                    <span className='font-bold text-rose-400'>MOMENTS</span><br />
+                    <span className='font-bold text-indigo-500'>MOMENTS</span><br />
                     and make them <br />
-                    <span className='font-bold text-rose-400'>ALIVE</span>
+                    <span className='font-bold text-indigo-500'>ALIVE</span>
                 </h1>
             </div>
             <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">

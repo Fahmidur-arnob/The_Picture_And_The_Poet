@@ -12,7 +12,7 @@ const AboutMe = () => {
                     <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={pic} alt="" />
                     <div class="flex flex-col justify-between p-4 leading-normal">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Hi, I am Md Fahmidur Rahman Arnob</h5>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">I am a full-stack web developer from Dhaka, Bangladesh. My focus was always been to transform pictures into poetry.My ideology is to capture special moments and make them alive when the time passes, and photography is the only way to do that.</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">I am a full-stack web developer & a photographer from Dhaka, Bangladesh. My focus was always been to transform pictures into poetry.My ideology is to capture special moments and make them alive when the time passes, and photography is the only way to do that.</p>
                     </div>
                 </Link>
 

@@ -49,7 +49,7 @@ const Header = ({ props }) => {
                         user?.uid ?
                             <>
                                 <span className=''>{user?.displayName}</span>
-                                <Link className="btn bg-blue-900 hover:bg-indigo-900 border border-gray-50" to='/register'>Log Out</Link>
+                                <Link onClick={handleLogOut} className="btn bg-blue-900 hover:bg-indigo-900 border border-gray-50" to='/register'>Log Out</Link>
                             </>
                             :
                             <>
