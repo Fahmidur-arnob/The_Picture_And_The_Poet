@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import ServiceCard from './ServiceCard';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import ServiceCard from '../../Services/ServiceCard';
 
 const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services`)
+        fetch(`http://localhost:5000/home`)
         .then(res => res.json())
         .then(data => setServices(data))
     }, []);
     return (
-        <div className='mb-20'>
+        <div>
+            <div className='mb-20'>
             <div className='text-center mb-4'>
                 <p className="text-4xl mb-3 font-bold text-indigo-600">Services</p>
                 <h2 className="text-5xl font-semibold text-blue-600 mb-4">Our Service Area</h2>
@@ -24,6 +26,7 @@ const Services = () => {
                     ></ServiceCard>)
                 }
             </div>
+        </div>
         </div>
     );
 };
