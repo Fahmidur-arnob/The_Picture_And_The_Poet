@@ -1,6 +1,5 @@
 import Main from "../../Layout/Main";
 import Appointment from "../../Pages/Appointment/Appointment";
-import Checkout from "../../Pages/Checkout/Checkout";
 import Details from "../../Pages/Details/Details";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -42,13 +41,9 @@ const router = createBrowserRouter([
                 loader: ({params}) =>fetch(`http://localhost:5000/services/${params.id}`) 
             },
             {
-                path:'/checkout/:id',
-                element:<Checkout></Checkout>,
-                loader:({params}) => fetch(`http://localhost:5000/services/${params.id}`)
-            },
-            {
-                path:'/reviews',
-                element:<Reviews></Reviews>
+                path:'/reviews/:id',
+                element:<Reviews></Reviews>,
+                loader: ({params}) =>fetch(`http://localhost:5000/services/${params.id}`)
             }
         ]
     }

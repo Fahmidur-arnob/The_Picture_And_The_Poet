@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import ReviewRow from './ReviewRow';
 
@@ -6,80 +7,62 @@ import ReviewRow from './ReviewRow';
 const Reviews = () => {
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
+    const { _id } = useLoaderData();
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [user?.email])
+    const handlePlaceOrder = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = `${form.firstName.value} ${form.lastName.value}`;
+        const email = user?.email || 'unregistered';
+        const phone = form.phone.value;
+        const message = form.message.value;
 
-    const handleDelete = id => {
-        const proceed = window.confirm('Are you sure about the review');
-        if(proceed){
-            fetch(`http://localhost:5000/reviews/${id}`,{
-                method:'DELETE'
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if(data.deletedCount > 0){
-                    alert(`Deleted Successfully`);
-                    const remaining = reviews.filter(odr => odr._id !== id)
-                    setReviews(remaining);
-                }
-            })
+        const review = {
+            service: _id,
+            serviceName: name,
+            customer: name,
+            email,
+            phone,
+            message
         }
-    }
 
-    const handleStatusUpdate = id => {
-        fetch(`http://localhost:5000/reviews/${id}`, {
-            method: 'PATCH', 
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({status: 'Approved'})
+            body: JSON.stringify(review)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.modifiedCount > 0) {
-                const remaining = reviews.filter(odr => odr._id !== id);
-                const approving = reviews.find(odr => odr._id === id);
-                approving.status = 'Approved'
+            .then(res => res.json())
+            .then(data => {
+                setReviews(data);
+                if(data.acknowledged){
+                    alert('Order placed successfully')
+                    form.reset();
 
-                const newOrders = [approving, ...remaining];
-                setReviews(newOrders);
-            }
-        })
+                }
+            })
+            .catch(er => console.error(er));
+
     }
 
     return (
-        <div>
-            <h2 className="text-5xl">You have {reviews.length} Reviews</h2>
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>
-                            </th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            reviews.map(order => <ReviewRow
-                                key={order._id}
-                                order={order}
-                                handleDelete={handleDelete}
-                                handleStatusUpdate={handleStatusUpdate}
-                            ></ReviewRow>)
-                        }
-                    </tbody>
-                </table>
-            </div>
+        <div className='mt-16 mb-20 max-w-lg mx-auto shadow-2xl p-7 rounded-2xl'>
+            <h2 className="text-5xl text-indigo-500 mb-5">You have total {reviews.length} reviews.</h2>
+            <form onSubmit={handlePlaceOrder}>
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                    <input name="firstName" type="text" placeholder="First Name" className="input input-ghost w-full  input-bordered" />
+
+                    <input name="lastName" type="text" placeholder="Last Name" className="input input-ghost w-full  input-bordered" />
+
+                    <input name="phone" type="text" placeholder="Your Phone" className="input input-ghost w-full  input-bordered" required />
+
+                    <input name="email" type="text" placeholder="Your email" className="input input-ghost w-full  input-bordered" />
+                </div>
+                <textarea name="message" className="textarea mt-5 textarea-bordered h-24 w-full" placeholder="Your Message" required></textarea>
+
+                <input className='btn mt-4 bg-blue-800' type="submit" value="Submit" />
+            </form>
         </div>
     );
 };
