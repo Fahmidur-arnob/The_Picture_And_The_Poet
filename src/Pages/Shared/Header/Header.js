@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
-import {FaUser} from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import './Header.css';
 
 const Header = ({ props }) => {
@@ -29,9 +29,18 @@ const Header = ({ props }) => {
                                 </Link>
                             </li>
                             <li><Link to='/appointment'>Appointment</Link></li>
+                            {
+                                user?.uid ?
+                                    <>
+                                        <Link className="btn bg-blue-900 hover:bg-indigo-700 border border-gray-50 hover:border-gray-50 mr-3" to='/myreviews'>My Reviews</Link>
+                                    </>
+                                    :
+                                    <></>
+                            }
+                            <li><Link to='/blog' className='font-semibold border border-gray-50 hover:bg-indigo-700'>Blog</Link></li>
                         </ul>
                     </div>
-                    <Link className="normal-case text-xl font-bold">Picture & Poetry</Link>
+                    <Link className="normal-case text-xl font-bold">Picture <br />& Poetry</Link>
                 </div>
                 <div className="navbar-center hidden  lg:flex">
                     <ul className="menu menu-horizontal p-0 navUL">
@@ -42,23 +51,24 @@ const Header = ({ props }) => {
                             </Link>
                         </li>
                         <li><Link to='/appointment' className='font-semibold border border-gray-50 hover:bg-indigo-700'>Appointment</Link></li>
+                        {
+                            user?.uid ?
+                                <>
+                                    <Link className="btn bg-blue-900 mr-3 hover:bg-indigo-700 border border-gray-50 hover:border-gray-50" to='/myreviews'>My Reviews</Link>
+                                </>
+                                :
+                                <></>
+                        }
+                        <li><Link to='/blog' className='font-semibold border border-gray-50 hover:bg-indigo-700'>Blog</Link></li>
                     </ul>
                 </div>
-                <div>
-                    {
-                        user?.uid ? 
-                        <>
-                            <Link className="btn bg-blue-900 hover:bg-indigo-900 border border-gray-50" to='/myreviews'>My Reviews</Link>
-                        </>
-                        :
-                        <></>
-                    }
-                </div>
+
                 <div className="navbar-end gap-2 mx-4">
                     {
                         user?.uid ?
                             <>
-                                <span className=''>{user?.displayName}</span>
+                                <span className='text-sm font-semibold'>{user?.displayName}</span>
+
                                 <Link onClick={handleLogOut} className="btn bg-blue-900 hover:bg-indigo-900 border border-gray-50" to='/register'>Log Out</Link>
                             </>
                             :
@@ -75,11 +85,11 @@ const Header = ({ props }) => {
                 </div>
                 <div className='mr-2'>
                     {
-                        user?.photoURL 
-                        ? 
-                        <img style={{height:'30px'}} rounded-xl src={user?.photoURL} title={`${user?.displayName}`} alt="No Img" />
-                        : 
-                        user?.uid ? <FaUser></FaUser> :<></>
+                        user?.photoURL
+                            ?
+                            <img style={{ height: '30px' }} rounded-xl src={user?.photoURL} title={`${user?.displayName}`} alt="No Img" />
+                            :
+                            user?.uid ? <FaUser></FaUser> : <></>
                     }
                 </div>
             </div>
