@@ -13,7 +13,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    //const from = location.state?.from?.pathname || '/'
+    const from = location.state?.from?.pathname || '/'
 
     const handleGoogleLogin = () => {
         googleProviderLogin(googleProvider)
@@ -40,7 +40,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                // navigate(from, { replace: true })
+                navigate(from, { replace: true })
             })
             .catch(error => console.log(`Error is ${error}`));
     }
