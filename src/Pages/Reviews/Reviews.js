@@ -25,7 +25,7 @@ const Reviews = () => {
             message
         }
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://the-picture-and-the-poet.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

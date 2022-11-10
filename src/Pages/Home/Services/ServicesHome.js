@@ -6,7 +6,7 @@ const ServicesHome = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/home`)
+        fetch(`https://the-picture-and-the-poet.vercel.app/home`)
         .then(res => res.json())
         .then(data => setServices(data))
     }, []);

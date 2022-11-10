@@ -9,7 +9,7 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${service}`)
+        fetch(`https://the-picture-and-the-poet.vercel.app/services/${service}`)
             .then(res => res.json())
             .then(data => setReviewService(data));
     }, [service])

@@ -41,12 +41,12 @@ const router = createBrowserRouter([
             {
                 path:'/services/:id',
                 element: <Details></Details>,
-                loader: ({params}) =>fetch(`http://localhost:5000/services/${params.id}`) 
+                loader: ({params}) =>fetch(`https://the-picture-and-the-poet.vercel.app/services/${params.id}`) 
             },
             {
                 path:'/reviews/:id',
                 element:<Reviews></Reviews>,
-                loader: ({params}) =>fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({params}) =>fetch(`https://the-picture-and-the-poet.vercel.app/services/${params.id}`)
             },
             {
                 path:'/myreviews',
