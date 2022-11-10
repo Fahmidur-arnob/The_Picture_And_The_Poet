@@ -37,17 +37,17 @@ const MyReviews = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({status: 'Approved'})
+            body: JSON.stringify({message: `No Message`})
         })
         .then(res => res.json())
         .then(data => {
             console.log(data);
             if(data.modifiedCount > 0) {
-                const remaining = reviews.filter(odr => odr._id !== id);
+                const remaining = reviews.filter(review => review._id !== id);
 
-                const approving = reviews.find(odr => odr._id === id);
+                const approving = reviews.find(review => review._id === id);
 
-                approving.status = 'Approved'
+                approving.message = 'No Message'
 
                 const newOrders = [approving, ...remaining];
                 setReviews(newOrders);

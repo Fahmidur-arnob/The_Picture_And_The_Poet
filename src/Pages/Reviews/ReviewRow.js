@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
     const { _id, phone, customer, email, service, message } = review;
@@ -32,9 +33,9 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
                 <span className="badge badge-ghost badge-sm">${email}</span>
             </td>
             <th>
-                <button 
+                <Link 
                 onClick={() => handleStatusUpdate(_id)}
-                className="btn btn-ghost btn-xs">{message ? message : 'No Message'}</button>
+                className="text-xl">{message ? message : 'no message'}</Link>
             </th>
         </tr>
     );
