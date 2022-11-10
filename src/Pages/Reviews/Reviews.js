@@ -9,7 +9,7 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
     const { _id } = useLoaderData();
 
-    const handlePlaceOrder = event => {
+    const handleSubmittingReview = event => {
         event.preventDefault();
         const form = event.target;
         const name = `${form.firstName.value} ${form.lastName.value}`;
@@ -19,7 +19,6 @@ const Reviews = () => {
 
         const review = {
             service: _id,
-            serviceName: name,
             customer: name,
             email,
             phone,
@@ -35,9 +34,9 @@ const Reviews = () => {
         })
             .then(res => res.json())
             .then(data => {
-                setReviews(data);
+                console.log(data);
                 if(data.acknowledged){
-                    alert('Order placed successfully')
+                    alert('Review Submitted successfully')
                     form.reset();
 
                 }
@@ -48,8 +47,8 @@ const Reviews = () => {
 
     return (
         <div className='mt-16 mb-20 max-w-lg mx-auto shadow-2xl p-7 rounded-2xl'>
-            <h2 className="text-5xl text-indigo-500 mb-5">You have total {reviews.length} reviews.</h2>
-            <form onSubmit={handlePlaceOrder}>
+            <h2 className="text-5xl text-indigo-500 mb-5">Please give a review</h2>
+            <form onSubmit={handleSubmittingReview}>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                     <input name="firstName" type="text" placeholder="First Name" className="input input-ghost w-full  input-bordered" />
 

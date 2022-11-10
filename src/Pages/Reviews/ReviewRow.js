@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
-    const { _id, serviceName, phone, customer, price, service, status } = review;
+    const { _id, phone, customer, email, service, message } = review;
     const [reviewService, setReviewService] = useState({});
 
     useEffect(() => {
@@ -9,6 +9,8 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
         .then(res => res.json())
         .then(data => setReviewService(data));
     }, [service])
+
+    
     return (
         <tr>
             <th>
@@ -18,13 +20,6 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
             </th>
             <td>
                 <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                        <div className="rounded w-24 h-24">
-                            {
-                                reviewService?.img && 
-                                <img src={reviewService.image} alt="Avatar Tailwind CSS Component" />}
-                        </div>
-                    </div>
                     <div>
                         <div className="font-bold">{customer}</div>
                         <div className="text-sm opacity-50">{phone}</div>
@@ -32,15 +27,14 @@ const ReviewRow = ({ review, handleDelete, handleStatusUpdate }) => {
                 </div>
             </td>
             <td>
-                {serviceName}
+                {service}
                 <br />
-                <span className="badge badge-ghost badge-sm">${price}</span>
+                <span className="badge badge-ghost badge-sm">${email}</span>
             </td>
-            <td>Purple</td>
             <th>
                 <button 
                 onClick={() => handleStatusUpdate(_id)}
-                className="btn btn-ghost btn-xs">{status ? status : 'pending'}</button>
+                className="btn btn-ghost btn-xs">{message ? message : 'No Message'}</button>
             </th>
         </tr>
     );

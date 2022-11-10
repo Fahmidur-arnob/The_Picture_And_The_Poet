@@ -3,7 +3,9 @@ import Appointment from "../../Pages/Appointment/Appointment";
 import Details from "../../Pages/Details/Details";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import MyReviews from "../../Pages/MyReviews/MyReviews";
 import Register from "../../Pages/Register/Register";
+import ReviewRow from "../../Pages/Reviews/ReviewRow";
 import Reviews from "../../Pages/Reviews/Reviews";
 import Services from "../../Pages/Services/Services";
 
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
                 path:'/reviews/:id',
                 element:<Reviews></Reviews>,
                 loader: ({params}) =>fetch(`http://localhost:5000/services/${params.id}`)
+            },
+            {
+                path:'/myreviews',
+                element:<MyReviews></MyReviews>
             }
         ]
     }

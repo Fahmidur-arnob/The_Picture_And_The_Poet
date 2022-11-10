@@ -44,6 +44,16 @@ const Header = ({ props }) => {
                         <li><Link to='/appointment' className='font-semibold border border-gray-50 hover:bg-indigo-700'>Appointment</Link></li>
                     </ul>
                 </div>
+                <div>
+                    {
+                        user?.uid ? 
+                        <>
+                            <Link className="btn bg-blue-900 hover:bg-indigo-900 border border-gray-50" to='/myreviews'>My Reviews</Link>
+                        </>
+                        :
+                        <></>
+                    }
+                </div>
                 <div className="navbar-end gap-2 mx-4">
                     {
                         user?.uid ?
