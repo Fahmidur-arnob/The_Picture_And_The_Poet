@@ -5,11 +5,14 @@ import './BannerItem.css';
 const BannerItem = ({ slide }) => {
     const { image, id, prev, next } = slide;
     return (
-        <div id={`slide${id}`} className="carousel-item relative w-full ">
+        <div id={`slide${id}`} className="carousel-item relative w-full h-2/4 ">
+
             <div className='carousel-img'>
                 <img src={image} alt="" className="carou-img rounded-xl" />
             </div>
+
             <div className="absolute flex justify-end transform -translate-y-1/2 left-5 top-1/4">
+
                 <h1 className='font-bold text-gray-50 lg:text-6xl'>
                     I freeze <br />
                     <span className='font-bold text-indigo-500'>MOMENTS</span><br />
@@ -17,6 +20,7 @@ const BannerItem = ({ slide }) => {
                     <span className='font-bold text-indigo-500'>ALIVE</span>
                 </h1>
             </div>
+
             <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
                 <a href={`#slide${prev}`} className="btn btn-circle mr-5">❮</a>
                 <a href={`#slide${next}`} className="btn btn-circle">❯</a>

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
-import app from '../../firebase/firebase.config';
+import {GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import { FaGooglePlusG } from 'react-icons/fa';
 
