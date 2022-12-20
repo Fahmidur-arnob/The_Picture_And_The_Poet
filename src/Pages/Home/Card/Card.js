@@ -12,7 +12,7 @@ const Card = () => {
     return (
 
         <>
-            <h1 className='text-5xl text-center mt-24 mb-16'>Some of My Work</h1>
+            <h1 className='text-5xl text-center mt-24 mb-16'>Some of Our Work</h1>
             <div className='mainPicGrid'> 
                 <div className="max-w-6xl mb-24 bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 picGrid">
                     <Link >
